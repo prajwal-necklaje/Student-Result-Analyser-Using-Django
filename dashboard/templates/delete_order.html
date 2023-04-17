@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+  <style>
+    /* Add some styles to make the template look more attractive */
+    h2 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    button[type="submit"]:hover {
+      background-color: #0069d9;
+    }
+  </style>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    // Add some JavaScript code to make the button more interactive
+    const button = document.querySelector('button[type="submit"]');
+    button.addEventListener('click', () => {
+      const confirmed = confirm('Are you sure you want to delete this result?');
+      if (!confirmed) {
+        event.preventDefault();
+      }
+    });
+  </script>
+{% endblock %}
+
+{% block content %}
+  <h2>Delete Result {{ order.pk }}</h2>
+  <p>Are you sure you want to delete this Result?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete it</button>
+  </form>
+{% endblock %}

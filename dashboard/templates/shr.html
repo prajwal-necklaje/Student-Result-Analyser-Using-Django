@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Result List</h1>
+  {% if orders %}
+    <table>
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Classes</th>
+          <th>Subject</th>
+          <th>Marks</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+          <tr>
+            <td>{{ order.student }}</td>
+            <td>{{ order.classes }}</td>
+            <td>{{ order.subject }}</td>
+            <td>{{ order.marks }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No data found.</p>
+  {% endif %}
+
+  <style>
+    /* Add some styles to make the template look more attractive */
+    h1 {
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    
+    th {
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #f7f7f7;
+    }
+    
+    td {
+      font-size: 16px;
+    }
+    
+    p {
+      font-size: 18px;
+    }
+  </style>
+{% endblock %}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <style>
+          
+          #header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+          }
+          #header h1 {
+            margin: 0;
+          }
+          #menu {
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: center;
+          }
+          #menu ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+          }
+          #menu ul li {
+            display: inline-block;
+            margin: 0 10px;
+          }
+          #menu ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+            transition: all 0.3s ease-in-out;
+          }
+          #menu ul li a:hover {
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+          }
+          #content {
+            padding: 50px;
+            text-align: center;
+          }
+          #content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+          }
+          #content p {
+            font-size: 18px;
+            line-height: 1.5;
+          }
+          .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          }
+      
+          .form {
+            display: flex;
+            flex-direction: column;
+          }
+      
+          .form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+          }
+      
+          .form input[type="text"] {
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+          }
+      
+          .form button[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+      
+          .form button[type="submit"]:hover {
+            background-color: #0069d9;
+          }
+          /* Add some styles to make the template look more attractive */
+    h2 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    button[type="submit"]:hover {
+      background-color: #0069d9;
+    }
+    .logo {
+      float: right;
+    }
+    
+  </style>
+</head>
+<body>
+  <div id="header">
+    <img src="images/fff.png" alt="Logo" class="logo">
+    <h1>STUDENT RESULT ANALYSIS</h1>
+    <button onclick="alert('By prajwal_necklaje')">Click me!</button>
+  </div>
+    <div id="menu">
+        <ul>
+            <li><a href="{% url 'dashboard:home' %}">Home</a></li>
+            <li><a href="{% url 'dashboard:add_order' %}">Add Result</a></li>
+            <li><a href="{% url 'dashboard:delte' %}">View Result</a></li>
+            <li><a href="{% url 'dashboard:index' %}">Delete Result</a></li>
+            <li><a href="{% url 'dashboard:dashboard_with_pivot' %}">Result Analyzer</a></li>
+
+        </ul>
+    </div>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

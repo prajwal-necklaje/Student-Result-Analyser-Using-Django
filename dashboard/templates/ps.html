@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard with Flexmonster</title>
+    <script src="https://cdn.flexmonster.com/flexmonster.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.flexmonster.com/demo.css">S
+    <style>
+/* Charts Style  */
+
+.fm-charts-color-1 {
+  fill: #ffa600 !important;
+}
+
+.fm-charts-color-2 {
+  fill: #7eae26 !important;
+}
+
+.fm-charts-color-3 {
+  fill: #00a45a !important;
+}
+S
+.fm-charts-color-4 {
+  fill: #df3800 !important;
+}
+
+.fm-charts-color-5 {
+  fill: #e95800 !important;
+}
+
+.fm-charts-color-6 {
+  fill: #ffa600 !important;
+}</style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-title"></div>
+      </nav>
+<div id="pivot-table-container" data-url="{% url 'dashboard:pivot_data' %}"></div>
+<div id="pivot-chart-container"></div>
+<script>
+function processData(dataset) {
+    var result = []
+    dataset = JSON.parse(dataset);
+    dataset.forEach(item => result.push(item.fields));
+    return result;
+}
+$.ajax({
+    url: $("#pivot-table-container").attr("data-url"),
+    dataType: 'json',
+    success: function(data) {
+        new Flexmonster({
+            container: "#pivot-table-container",
+            componentFolder: "https://cdn.flexmonster.com/",
+            width: "100%",
+            height: 430,
+            toolbar: true,
+            report: {
+                dataSource: {
+                    type: "json",
+                    data: processData(data),
+                    mapping: {
+                        "student": {
+                            "caption": "Student"
+                        },
+                        "student_classes": {
+                            "caption": "Classes"
+                        },
+                        "subject": {
+                            "caption": "Subject"
+                        },
+                        "marks": {
+                            "caption": "Marks",
+                            "type": "number"
+                        }
+                    }
+                },
+                "slice": {
+                    "rows": [{
+                        "uniqueName": "Student"
+                    }],
+                    "columns": [{
+                            "uniqueName": "Classes"
+                        },
+                        {
+                            "uniqueName": "[Measures]"
+                        }
+                    ],
+                    "measures": [{
+                            "uniqueName": "Marks",
+                            "aggregation": "sum"
+                        }
+                    ]
+                }
+            }
+        });
+        new Flexmonster({
+            container: "#pivot-chart-container",
+            componentFolder: "https://cdn.flexmonster.com/",
+            width: "100%",
+            height: 430,
+            //toolbar: true,
+            report: {
+                dataSource: {
+                    type: "json",
+                    data: processData(data),
+                    mapping: {
+                        "student": {
+                            "caption": "Student"
+                        },
+                        "student_classes": {
+                            "caption": "Classes"
+                        },
+                        "subject": {
+                            "caption": "Subject"
+                        },
+                        "marks": {
+                            "caption": "Marks",
+                            "type": "number"
+                        }
+                    }
+                },
+                "slice": {
+                    "rows": [{
+                        "uniqueName": "Student"
+                    }],
+                    "columns": [{
+                        "uniqueName": "[Measures]"
+                    }],
+                    "measures": [{
+                        "uniqueName": "Total Marks",
+                        "formula": "sum(\"marks\")",
+                        "caption": "Total Marks"
+                    }]
+                },
+                "options": {
+                    "viewType": "charts",
+                    "chart": {
+                        "type": "pie"
+                    }
+                }
+            }
+        });
+    }
+});
+
+
+</script>
+</body>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+body {
+    {% load static %}
+    font-family: Arial, sans-serif;
+    background-image: url('{% static "images/shrapr.jpg" %}');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+  }
+  
+  
+  @keyframes background-animation {
+      0% {
+          background-position: center 0%;
+      }
+      50% {
+          background-position: center 100%;
+      }
+      100% {
+          background-position: center 0%;
+      }
+  }
+</style>
+<div id="content">
+    <h2>Analyse Your Student Result Here</h2>
+    <p>internship project</p>
+</div>
+        
+{% endblock %}
